@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.navLinks:hover {
+  background-color: #cc506e;
+}
+
+.navLinksDropdown:hover {
+  background-color: #495057;
+}
