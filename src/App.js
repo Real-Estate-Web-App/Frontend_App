@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import NavigationBar from './navigation-bar';
 import Home from './home/home';
+import News from "./news/news";
 // import ErrorPage from './commons/errorhandling/error-page';
 // import styles from './commons/styles/project-style.css';
 
@@ -26,8 +27,8 @@ function App() {
               />
               <Route
                   exact
-                  path='/'
-                  render={() => <Home />}
+                  path='/news'
+                  render={() => <News />}
               />
               {/*<Route*/}
               {/*    exact*/}

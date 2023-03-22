@@ -51,7 +51,7 @@ function NavigationBar(props) {
                 <Nav className="mx-auto" navbar>
                     <NavLink href="/" style={textStyle} className="navLinks">Acasa</NavLink>
 
-                    <NavLink href="/" style={textStyle} className="navLinks">Noutati</NavLink>
+                    <NavLink href="/news" style={textStyle} className="navLinks">Noutati</NavLink>
 
                     <NavLink href="/" style={textStyle} className="navLinks">Despre noi</NavLink>
 

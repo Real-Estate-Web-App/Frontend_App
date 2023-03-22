@@ -1,0 +1,54 @@
+/* News page */
+
+body{
+    overflow-x: hidden;
+}
+
+.mainDiv{
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bgrImageDiv{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../commons/images/news-page-bgrImage.jpg');
+    width: 100vw;
+    height: 100vh;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cardsDiv{
+    display: grid;
+    width: 100vw;
+    height: fit-content;
+
+    padding: 8vmax 3vmax 5vmax 3vmax;
+}
+
+.card1Div{
+    grid-column: 1;
+    grid-row: 1;
+    width: 30vmax;
+    height: fit-content;
+}
+
+.card2Div{
+    grid-column: 2;
+    grid-row: 1;
+    width: 30vmax;
+    height: fit-content;
+}
+
+.card3Div{
+    grid-column: 3;
+    grid-row: 1;
+    width: 30vmax;
+    height: fit-content;
+}
+
+.cardBody{
+    text-align: center;
+}
