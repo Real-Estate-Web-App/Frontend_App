@@ -55,6 +55,12 @@ function News(){
 
                 </div>
             </div>
+
+            <div className="infoDiv">
+                <p>* La închirierea/cumpărarea imobilelor recent adăugate se oferă o reducere de 50% din prețul
+                    prelucrării datelor *</p>
+            </div>
+
         </div>
     );
 

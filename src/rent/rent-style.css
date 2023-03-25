@@ -1,0 +1,111 @@
+/* Rent page */
+
+body{
+    overflow-x: hidden;
+    padding-top: 4.1vmax;
+}
+
+.mainDiv{
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bgrImageDiv1{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../commons/images/residential-studio.jpg');
+    width: 100vw;
+    height: 100vh;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bgrImageDiv2{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../commons/images/residential-apartments.jpg');
+    width: 100vw;
+    height: 100vh;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: block;
+}
+
+.bgrImageDiv3{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../commons/images/residential-houses.jpg');
+    width: 100vw;
+    height: 100vh;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bgrImageDiv4{
+
+}
+
+.bgrImageDiv5{
+
+}
+
+.bgrImageDiv6{
+
+}
+
+.multipleCardsDiv{
+    display: block;
+
+    width: 60vmax;
+    height: 25vmax;
+
+    border: 3px solid #cc506e;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 1vmax 2vmax 1vmax 10vmax;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.cardsTextStyle{
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 1vmax;
+}
+
+.colsStyle{
+    background: #585454;
+    border-radius: 0.5vmax;
+}
+
+.cardDiv{
+    --bs-card-bg: #585454 !important;
+    margin: 1vmax 2vmax 1vmax 2vmax;
+}
+
+.headerDiv{
+    display: flex;
+    padding: 2vmax 2vmax 0 2vmax;
+}
+
+.header1Style1{
+    color: #FFFFFF;
+    text-shadow: 2px 2px #cc506e;
+    font-size: 2vmax;
+}
+
+.header1Style2{
+    color: #cc506e;
+    text-shadow: 2px 2px #585454;
+    font-size: 2vmax;
+}
+
+.header2Style{
+    color: #FFFFFF;
+    text-shadow: 2px 2px #9ACD32;
+    font-size: 2vmax;
+
+    padding: 0 2vmax 1vmax 10vmax;
+}

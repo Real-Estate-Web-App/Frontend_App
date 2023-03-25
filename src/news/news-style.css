@@ -2,6 +2,7 @@
 
 body{
     overflow-x: hidden;
+    padding-top: 4.1vmax;
 }
 
 .mainDiv{
@@ -51,4 +52,19 @@ body{
 
 .cardBody{
     text-align: center;
+}
+
+.infoDiv{
+    background-color: #585454;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    width: 100vw;
+    height: fit-content;
+
+    border: 2px solid #cc506e;
+
+    padding: 3vmax 4vmax 3vmax 10vmax;
+
+    color: #FFFFFF;
+    font-size: 1.5vmax;
 }

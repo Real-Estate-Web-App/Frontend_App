@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavigationBar from './navigation-bar';
 import Home from './home/home';
 import News from "./news/news";
+import Rent from "./rent/rent";
 // import ErrorPage from './commons/errorhandling/error-page';
 // import styles from './commons/styles/project-style.css';
 
@@ -30,11 +31,11 @@ function App() {
                   path='/news'
                   render={() => <News />}
               />
-              {/*<Route*/}
-              {/*    exact*/}
-              {/*    path='/user'*/}
-              {/*    render={() => <UserContainer />}*/}
-              {/*/>*/}
+              <Route
+                  exact
+                  path='/rent'
+                  render={() => <Rent />}
+              />
 
               {/*<Route*/}
               {/*    exact*/}

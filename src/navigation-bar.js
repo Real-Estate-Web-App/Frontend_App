@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import './index.css';
 import {
     Button, Dropdown,
@@ -11,7 +11,7 @@ import {
     NavLink,
 } from 'reactstrap';
 import logo from './commons/images/navbar-image.png';
-import { withRouter } from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 const textStyle = {
     color: 'white',
@@ -25,25 +25,55 @@ function NavigationBar(props) {
     const [residentialDropdownOpen, setResidentialDropdownOpen] = useState(false);
     const [commercialDropdownOpen, setCommercialDropdownOpen] = useState(false);
 
+    const purchaseRef = useRef(null);
+
     function rentToggle(){
-        setRentDropdownOpen((prevVal) => !prevVal);
+        purchaseRef.current.click();
+    }
+
+    function rentMouseOn(){
+        setRentDropdownOpen(true);
+    }
+
+    function rentMouseOff(){
+        setRentDropdownOpen(false);
     }
 
     function buyToggle(){
-        setBuyDropdownOpen((prevVal) => !prevVal);
+        purchaseRef.current.click();
     }
 
-    function residentialToggle(){
-        setResidentialDropdownOpen((prevVal) => !prevVal);
+    function buyMouseOn(){
+        setBuyDropdownOpen(true);
     }
 
-    function commercialToggle(){
-        setCommercialDropdownOpen((prevVal) => !prevVal);
+    function buyMouseOff(){
+        setBuyDropdownOpen(false);
+    }
+
+    function residentialToggle(){}
+
+    function residentialMouseOn(){
+        setResidentialDropdownOpen(true);
+    }
+
+    function residentialMouseOff(){
+        setResidentialDropdownOpen(false);
+    }
+
+    function commercialToggle(){}
+
+    function commercialMouseOn(){
+        setCommercialDropdownOpen(true);
+    }
+
+    function commercialMouseOff(){
+        setCommercialDropdownOpen(false);
     }
 
     return (
         <div>
-            <Navbar className="sticky-top" style={{backgroundColor: '#585454'}} light expand="md">
+            <Navbar className="fixed-top" style={{backgroundColor: '#585454'}} light expand="md">
                 <NavbarBrand href="/">
                     {/*onClick={props.onClickFunction}*/}{/*functie care la apasarea iconitei reseteaza cookies -> logout user*/}
                     <img src={logo} width={"38vmax"} height={"38vmax"} alt={"logo"} />
@@ -55,12 +85,12 @@ function NavigationBar(props) {
 
                     <NavLink href="/" style={textStyle} className="navLinks">Despre noi</NavLink>
 
-                    <Dropdown direction={'end'} toggle={rentToggle} isOpen={rentDropdownOpen}>
+                    <Dropdown direction={'end'} onMouseEnter={rentMouseOn} onMouseLeave={rentMouseOff} toggle={rentToggle} isOpen={rentDropdownOpen}>
                         <DropdownToggle style={textStyle} className="navLinks" nav caret>
                             Inchirieri
                         </DropdownToggle>
                         <DropdownMenu dark>
-                            <Dropdown direction={'end'} toggle={residentialToggle} isOpen={residentialDropdownOpen}>
+                            <Dropdown direction={'end'} onMouseEnter={residentialMouseOn} onMouseLeave={residentialMouseOff} toggle={residentialToggle} isOpen={residentialDropdownOpen}>
                                 <DropdownToggle style={textStyle} className="navLinksDropdown" nav caret>
                                     Imobile rezidentiale
                                 </DropdownToggle>
@@ -80,7 +110,7 @@ function NavigationBar(props) {
                                 </DropdownMenu>
                             </Dropdown>
 
-                            <Dropdown direction={'end'} toggle={commercialToggle} isOpen={commercialDropdownOpen}>
+                            <Dropdown direction={'end'} onMouseEnter={commercialMouseOn} onMouseLeave={commercialMouseOff} toggle={commercialToggle} isOpen={commercialDropdownOpen}>
                                 <DropdownToggle style={textStyle} className="navLinksDropdown" nav caret>
                                     Imobile comerciale
                                 </DropdownToggle>
@@ -104,12 +134,12 @@ function NavigationBar(props) {
                     </Dropdown>
 
 
-                    <Dropdown direction={'end'} toggle={buyToggle} isOpen={buyDropdownOpen}>
+                    <Dropdown direction={'end'} onMouseEnter={buyMouseOn} onMouseLeave={buyMouseOff} toggle={buyToggle} isOpen={buyDropdownOpen}>
                         <DropdownToggle style={textStyle} className="navLinks" nav caret>
                             Vanzari
                         </DropdownToggle>
                         <DropdownMenu dark>
-                            <Dropdown direction={'end'} toggle={residentialToggle} isOpen={residentialDropdownOpen}>
+                            <Dropdown direction={'end'} onMouseEnter={residentialMouseOn} onMouseLeave={residentialMouseOff} toggle={residentialToggle} isOpen={residentialDropdownOpen}>
                                 <DropdownToggle style={textStyle} className="navLinksDropdown" nav caret>
                                     Imobile rezidentiale
                                 </DropdownToggle>
@@ -129,7 +159,7 @@ function NavigationBar(props) {
                                 </DropdownMenu>
                             </Dropdown>
 
-                            <Dropdown direction={'end'} toggle={commercialToggle} isOpen={commercialDropdownOpen}>
+                            <Dropdown direction={'end'} onMouseEnter={commercialMouseOn} onMouseLeave={commercialMouseOff} toggle={commercialToggle} isOpen={commercialDropdownOpen}>
                                 <DropdownToggle style={textStyle} className="navLinksDropdown" nav caret>
                                     Imobile comerciale
                                 </DropdownToggle>
@@ -163,6 +193,7 @@ function NavigationBar(props) {
                     </NavItem>
                 </Nav>
             </Navbar>
+            <a ref={purchaseRef} href="/rent" style={{display: 'none'}}/>
         </div>
     );
 }
