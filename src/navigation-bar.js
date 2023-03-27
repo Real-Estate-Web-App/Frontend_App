@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './index.css';
 import {
     Button, Dropdown,
@@ -15,7 +15,7 @@ import {Link, withRouter} from "react-router-dom";
 
 const textStyle = {
     color: 'white',
-    textDecoration: 'none'
+    textDecoration: 'none',
 };
 
 function NavigationBar(props) {

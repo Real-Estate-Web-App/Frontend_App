@@ -6,7 +6,7 @@ import Home from './home/home';
 import News from "./news/news";
 import Rent from "./rent/rent";
 // import ErrorPage from './commons/errorhandling/error-page';
-// import styles from './commons/styles/project-style.css';
+import './App.css';
 
 function App() {
 

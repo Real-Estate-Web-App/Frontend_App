@@ -2,7 +2,6 @@
 
 body{
     overflow-x: hidden;
-    padding-top: 4.1vmax;
 }
 
 .mainDiv{
@@ -108,4 +107,91 @@ body{
     font-size: 2vmax;
 
     padding: 0 2vmax 1vmax 10vmax;
+}
+
+.headerApartmentsHouses{
+    color: #FFFFFF;
+    text-shadow: 2px 2px #9ACD32;
+    font-size: 2vmax;
+
+    padding: 4vmax 2vmax 1vmax 10vmax;
+}
+
+.searchDiv{
+    display: grid;
+    width: 100vw;
+    height: fit-content;
+
+    padding: 3vmax 30vmax 3vmax 10vmax;
+}
+
+.col1Search{
+    grid-column: 1;
+    grid-row: 1;
+    width: 13vmax;
+
+    align-self: center;
+}
+
+.col2Search{
+    grid-column: 2;
+    grid-row: 1;
+    width: 20vmax;
+
+    align-self: center;
+}
+
+.col3Search{
+    grid-column: 3;
+    grid-row: 1;
+    width: 8vmax;
+
+    align-self: center;
+}
+
+.col4Search{
+    grid-column: 4;
+    grid-row: 1;
+    width: 3vmax;
+
+    align-self: center;
+}
+
+.col5Search{
+    grid-column: 5;
+    grid-row: 1;
+    width: 12vmax;
+
+    align-self: center;
+}
+
+.react-date-picker{
+    background: #FFFFFF;
+    height: 2vmax;
+}
+
+.col6Search{
+    grid-column: 6;
+    grid-row: 1;
+    width: 15vmax;
+
+    align-self: center;
+}
+
+.textSearch{
+    color: #FFFFFF;
+    text-shadow: 2px 2px #cc506e;
+    font-size: 1.3vmax;
+}
+
+.inputStyle{
+    background: #585454 !important;
+    color: #FFFFFF !important;
+    border: #585454 !important;
+}
+
+.inputStyle:focus{
+    background: #585454 !important;
+    color: #FFFFFF !important;
+    border: #585454 !important;
 }
