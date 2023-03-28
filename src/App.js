@@ -1,11 +1,15 @@
-// import React, {useEffect, useState} from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import NavigationBar from './navigation-bar';
 import Home from './home/home';
 import News from "./news/news";
 import Rent from "./rent/rent";
+import Purchase from "./purchase/purchase";
+import AboutUs from "./aboutus/about-us";
+import Contact from "./contact/contact";
 // import ErrorPage from './commons/errorhandling/error-page';
+
 import './App.css';
 
 function App() {
@@ -36,18 +40,21 @@ function App() {
                   path='/rent'
                   render={() => <Rent />}
               />
-
-              {/*<Route*/}
-              {/*    exact*/}
-              {/*    path='/device'*/}
-              {/*    render={() => <DeviceContainer />}*/}
-              {/*/>*/}
-
-              {/*<Route*/}
-              {/*    exact*/}
-              {/*    path='/client'*/}
-              {/*    render={() => <ClientContainer />}*/}
-              {/*/>*/}
+              <Route
+                  exact
+                  path='/purchase'
+                  render={() => <Purchase />}
+              />
+              <Route
+                  exact
+                  path='/aboutUs'
+                  render={() => <AboutUs />}
+              />
+              <Route
+                  exact
+                  path='/contact'
+                  render={() => <Contact />}
+              />
 
               {/*/!*Error*!/*/}
               {/*<Route*/}
@@ -65,30 +72,3 @@ function App() {
 }
 
 export default App;
-
-// Varianta initiala a proiectului (varianta default proiect react):
-/*import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;*/

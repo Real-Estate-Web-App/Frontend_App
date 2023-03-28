@@ -10,10 +10,11 @@ function News(){
     return(
         <div className="mainDiv">
             <div className="bgrImageDiv">
+                <p className="headerTextStyle">Cele mai recente anunturi imobiliare din zona ta:</p>
                 <div className="cardsDiv">
                     <Card className="card1Div">
                         <CardImg variant="top" src={firstCardImage} />
-                        <CardBody className="cardBody">
+                        <CardBody>
                             <CardTitle>Casa de vanzare - 4 camere</CardTitle>
                             <CardText>
                                 Cluj-Napoca, Cluj
@@ -21,13 +22,13 @@ function News(){
                             <CardText>
                                 4 camere | 160 m² utili | 430 m²
                             </CardText>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Button style={{backgroundColor: '#cc506e'}}>Vezi anuntul</Button>
                         </CardBody>
                     </Card>
 
                     <Card className="card2Div">
                         <CardImg variant="top" src={secondCardImage} />
-                        <CardBody className="cardBody">
+                        <CardBody>
                             <CardTitle>Casa de vanzare - 3 camere</CardTitle>
                             <CardText>
                                 Apahida, Cluj
@@ -35,13 +36,13 @@ function News(){
                             <CardText>
                                 3 camere | 140 m² utili | 350 m²
                             </CardText>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Button style={{backgroundColor: '#cc506e'}}>Vezi anuntul</Button>
                         </CardBody>
                     </Card>
 
                     <Card className="card3Div">
                         <CardImg variant="top" src={thirdCardImage} />
-                        <CardBody className="cardBody">
+                        <CardBody>
                             <CardTitle>Casa de vanzare - 5 camere</CardTitle>
                             <CardText>
                                 Florești, Cluj
@@ -49,7 +50,7 @@ function News(){
                             <CardText>
                                 5 camere | 211 m² utili | 600 m²
                             </CardText>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Button style={{backgroundColor: '#cc506e'}}>Vezi anuntul</Button>
                         </CardBody>
                     </Card>
 

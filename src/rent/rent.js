@@ -12,10 +12,10 @@ function Rent(){
 
     return(
         <div className="mainDiv">
-            <div className="bgrImageDiv1">
+            <div className="bgrImageDiv1" id="studiosDiv">
                 <div className="headerDiv">
-                    <p className="header1Style1">IMOBILE&nbsp;</p>
-                    <p className="header1Style2">REZIDENTIALE</p>
+                    <p className="header1Style1">IMOBILE DE&nbsp;</p>
+                    <p className="header1Style2">INCHIRIAT</p>
                 </div>
                 <p className="header2Style">ANUNTURI GARSONIERE</p>
                 <div className="multipleCardsDiv cardsTextStyle">
@@ -26,30 +26,12 @@ function Rent(){
                             </Col>
                             <Col md={8} className="colsStyle">
                                 <CardBody>
-                                    <CardTitle>Casa de vanzare - 5 camere</CardTitle>
+                                    <CardTitle>Garsoniera de 25 m²</CardTitle>
                                     <CardText>
-                                        Florești, Cluj
+                                        Cluj-Napoca, Cluj
                                     </CardText>
                                     <CardText>
-                                        5 camere | 211 m² utili | 600 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Casa de vanzare - 5 camere</CardTitle>
-                                    <CardText>
-                                        Florești, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        5 camere | 211 m² utili | 600 m²
+                                        30.000 € | 1.200 €/m² | 1 camera | 25 m²
                                     </CardText>
                                 </CardBody>
                             </Col>
@@ -62,12 +44,30 @@ function Rent(){
                             </Col>
                             <Col md={8} className="colsStyle">
                                 <CardBody>
-                                    <CardTitle>Casa de vanzare - 5 camere</CardTitle>
+                                    <CardTitle>Garsoniera de 30 m²</CardTitle>
                                     <CardText>
-                                        Florești, Cluj
+                                        Gilau, Cluj
                                     </CardText>
                                     <CardText>
-                                        5 camere | 211 m² utili | 600 m²
+                                        30.000 € | 1.000 €/m² | 1 camera | 30 m²
+                                    </CardText>
+                                </CardBody>
+                            </Col>
+                        </Row>
+                    </Card>
+                    <Card className="cardDiv">
+                        <Row className="g-0">
+                            <Col md={4} className="colsStyle">
+                                <CardImg variant="top" src={thirdCardImage} />
+                            </Col>
+                            <Col md={8} className="colsStyle">
+                                <CardBody>
+                                    <CardTitle>Garsoniera de 35 m²</CardTitle>
+                                    <CardText>
+                                        Floresti, Cluj
+                                    </CardText>
+                                    <CardText>
+                                        35.000 € | 1.200 €/m² | 2 camere | 35 m²
                                     </CardText>
                                 </CardBody>
                             </Col>
@@ -96,7 +96,7 @@ function Rent(){
                 </div>
             </div>
 
-            <div className="bgrImageDiv2">
+            <div className="bgrImageDiv2" id="apartmentsDiv">
                 <p className="headerApartmentsHouses">ANUNTURI APARTAMENTE</p>
                 <div className="multipleCardsDiv cardsTextStyle">
                     <Card className="cardDiv">
@@ -106,30 +106,12 @@ function Rent(){
                             </Col>
                             <Col md={8} className="colsStyle">
                                 <CardBody>
-                                    <CardTitle>Casa de vanzare - 5 camere</CardTitle>
+                                    <CardTitle>Apartament de 60 m²</CardTitle>
                                     <CardText>
-                                        Florești, Cluj
+                                        Cluj-Napoca, Cluj
                                     </CardText>
                                     <CardText>
-                                        5 camere | 211 m² utili | 600 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Casa de vanzare - 5 camere</CardTitle>
-                                    <CardText>
-                                        Florești, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        5 camere | 211 m² utili | 600 m²
+                                        60.000 € | 1.000 €/m² | 2 camere | 60 m²
                                     </CardText>
                                 </CardBody>
                             </Col>
@@ -142,12 +124,30 @@ function Rent(){
                             </Col>
                             <Col md={8} className="colsStyle">
                                 <CardBody>
-                                    <CardTitle>Casa de vanzare - 5 camere</CardTitle>
+                                    <CardTitle>Apartament de 100 m²</CardTitle>
                                     <CardText>
                                         Florești, Cluj
                                     </CardText>
                                     <CardText>
-                                        5 camere | 211 m² utili | 600 m²
+                                        100.000 € | 1.000 €/m² | 3 camere | 100 m²
+                                    </CardText>
+                                </CardBody>
+                            </Col>
+                        </Row>
+                    </Card>
+                    <Card className="cardDiv">
+                        <Row className="g-0">
+                            <Col md={4} className="colsStyle">
+                                <CardImg variant="top" src={thirdCardImage} />
+                            </Col>
+                            <Col md={8} className="colsStyle">
+                                <CardBody>
+                                    <CardTitle>Apartament de 90 m²</CardTitle>
+                                    <CardText>
+                                        Apahida, Cluj
+                                    </CardText>
+                                    <CardText>
+                                        85.000 € | 945 €/m² | 3 camere | 90 m²
                                     </CardText>
                                 </CardBody>
                             </Col>
@@ -176,7 +176,7 @@ function Rent(){
                 </div>
             </div>
 
-            <div className="bgrImageDiv3">
+            <div className="bgrImageDiv3" id="housesDiv">
                 <p className="headerApartmentsHouses">ANUNTURI CASE</p>
                 <div className="multipleCardsDiv cardsTextStyle">
                     <Card className="cardDiv">
@@ -186,30 +186,12 @@ function Rent(){
                             </Col>
                             <Col md={8} className="colsStyle">
                                 <CardBody>
-                                    <CardTitle>Casa de vanzare - 5 camere</CardTitle>
+                                    <CardTitle>Casa de 180 m²</CardTitle>
                                     <CardText>
-                                        Florești, Cluj
+                                        Cluj-Napoca, Cluj
                                     </CardText>
                                     <CardText>
-                                        5 camere | 211 m² utili | 600 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Casa de vanzare - 5 camere</CardTitle>
-                                    <CardText>
-                                        Florești, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        5 camere | 211 m² utili | 600 m²
+                                        250.000 € | 1.389 €/m² | 4 camere | 180 m²
                                     </CardText>
                                 </CardBody>
                             </Col>
@@ -222,12 +204,30 @@ function Rent(){
                             </Col>
                             <Col md={8} className="colsStyle">
                                 <CardBody>
-                                    <CardTitle>Casa de vanzare - 5 camere</CardTitle>
+                                    <CardTitle>Casa de 200 m²</CardTitle>
                                     <CardText>
                                         Florești, Cluj
                                     </CardText>
                                     <CardText>
-                                        5 camere | 211 m² utili | 600 m²
+                                        300.000 € | 1.500 €/m² | 5 camere | 200 m²
+                                    </CardText>
+                                </CardBody>
+                            </Col>
+                        </Row>
+                    </Card>
+                    <Card className="cardDiv">
+                        <Row className="g-0">
+                            <Col md={4} className="colsStyle">
+                                <CardImg variant="top" src={thirdCardImage} />
+                            </Col>
+                            <Col md={8} className="colsStyle">
+                                <CardBody>
+                                    <CardTitle>Casa de 230 m²</CardTitle>
+                                    <CardText>
+                                        Apahida, Cluj
+                                    </CardText>
+                                    <CardText>
+                                        300.000 € | 1.305 €/m² | 6 camere | 230 m²
                                     </CardText>
                                 </CardBody>
                             </Col>

@@ -1,0 +1,157 @@
+/* Purchase page */
+
+body{
+    overflow-x: hidden;
+}
+
+.mainDiv_2{
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
+.bgrImageDiv1_2{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../commons/images/residential-studio.jpg');
+    width: 100vw;
+    height: 100vh;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bgrImageDiv2_2{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../commons/images/residential-apartments.jpg');
+    width: 100vw;
+    height: 100vh;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: block;
+}
+
+.bgrImageDiv3_2{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../commons/images/residential-houses.jpg');
+    width: 100vw;
+    height: 100vh;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.multipleCardsDiv_2{
+    display: block;
+
+    width: 60vmax;
+    height: 25vmax;
+
+    border: 3px solid #cc506e;
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5vmax;
+    margin: 1vmax 2vmax 1vmax 10vmax;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.cardsTextStyle_2{
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 1vmax;
+}
+
+.colsStyle_2{
+    background: #585454;
+    border-radius: 0.5vmax;
+}
+
+.cardDiv_2{
+    --bs-card-bg: #585454 !important;
+    margin: 1vmax 2vmax 1vmax 2vmax;
+}
+
+.headerDiv_2{
+    display: flex;
+    padding: 2vmax 2vmax 0 2vmax;
+}
+
+.header1Style1_2{
+    color: #FFFFFF;
+    text-shadow: 2px 2px #cc506e;
+    font-size: 2vmax;
+}
+
+.header1Style2_2{
+    color: #cc506e;
+    text-shadow: 2px 2px #585454;
+    font-size: 2vmax;
+}
+
+.header2Style_2{
+    color: #FFFFFF;
+    text-shadow: 2px 2px #9ACD32;
+    font-size: 2vmax;
+
+    padding: 0 2vmax 1vmax 10vmax;
+}
+
+.headerApartmentsHouses_2{
+    color: #FFFFFF;
+    text-shadow: 2px 2px #9ACD32;
+    font-size: 2vmax;
+
+    padding: 4vmax 2vmax 1vmax 10vmax;
+}
+
+.searchDiv_2{
+    display: grid;
+    width: 100vw;
+    height: fit-content;
+
+    padding: 3vmax 30vmax 3vmax 10vmax;
+}
+
+.col1Search_2{
+    grid-column: 1;
+    grid-row: 1;
+    width: 13vmax;
+
+    align-self: center;
+}
+
+.col2Search_2{
+    grid-column: 2;
+    grid-row: 1;
+    width: 20vmax;
+
+    align-self: center;
+}
+
+.col3Search_2{
+    grid-column: 3;
+    grid-row: 1;
+    width: 8vmax;
+
+    align-self: center;
+}
+
+.textSearch_2{
+    color: #FFFFFF;
+    text-shadow: 2px 2px #cc506e;
+    font-size: 1.3vmax;
+}
+
+.inputStyle_2{
+    background: #585454 !important;
+    color: #FFFFFF !important;
+    border: #585454 !important;
+}
+
+.inputStyle_2:focus{
+    background: #585454 !important;
+    color: #FFFFFF !important;
+    border: #585454 !important;
+}

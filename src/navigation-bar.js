@@ -11,7 +11,7 @@ import {
     NavLink,
 } from 'reactstrap';
 import logo from './commons/images/navbar-image.png';
-import {Link, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 const textStyle = {
     color: 'white',
@@ -22,13 +22,12 @@ function NavigationBar(props) {
 
     const [rentDropdownOpen, setRentDropdownOpen] = useState(false);
     const [buyDropdownOpen, setBuyDropdownOpen] = useState(false);
-    const [residentialDropdownOpen, setResidentialDropdownOpen] = useState(false);
-    const [commercialDropdownOpen, setCommercialDropdownOpen] = useState(false);
 
+    const rentRef = useRef(null);
     const purchaseRef = useRef(null);
 
     function rentToggle(){
-        purchaseRef.current.click();
+        rentRef.current.click();
     }
 
     function rentMouseOn(){
@@ -51,26 +50,6 @@ function NavigationBar(props) {
         setBuyDropdownOpen(false);
     }
 
-    function residentialToggle(){}
-
-    function residentialMouseOn(){
-        setResidentialDropdownOpen(true);
-    }
-
-    function residentialMouseOff(){
-        setResidentialDropdownOpen(false);
-    }
-
-    function commercialToggle(){}
-
-    function commercialMouseOn(){
-        setCommercialDropdownOpen(true);
-    }
-
-    function commercialMouseOff(){
-        setCommercialDropdownOpen(false);
-    }
-
     return (
         <div>
             <Navbar className="fixed-top" style={{backgroundColor: '#585454'}} light expand="md">
@@ -83,53 +62,24 @@ function NavigationBar(props) {
 
                     <NavLink href="/news" style={textStyle} className="navLinks">Noutati</NavLink>
 
-                    <NavLink href="/" style={textStyle} className="navLinks">Despre noi</NavLink>
+                    <NavLink href="/aboutUs" style={textStyle} className="navLinks">Despre noi</NavLink>
 
                     <Dropdown direction={'end'} onMouseEnter={rentMouseOn} onMouseLeave={rentMouseOff} toggle={rentToggle} isOpen={rentDropdownOpen}>
                         <DropdownToggle style={textStyle} className="navLinks" nav caret>
                             Inchirieri
                         </DropdownToggle>
                         <DropdownMenu dark>
-                            <Dropdown direction={'end'} onMouseEnter={residentialMouseOn} onMouseLeave={residentialMouseOff} toggle={residentialToggle} isOpen={residentialDropdownOpen}>
-                                <DropdownToggle style={textStyle} className="navLinksDropdown" nav caret>
-                                    Imobile rezidentiale
-                                </DropdownToggle>
-                                <DropdownMenu dark>
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Garsoniere</NavLink>
-                                    </DropdownItem>
+                            <DropdownItem>
+                                <NavLink href="/rent#studiosDiv" style={textStyle}>Garsoniere</NavLink>
+                            </DropdownItem>
 
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Apartamente</NavLink>
-                                    </DropdownItem>
+                            <DropdownItem>
+                                <NavLink href="/rent#apartmentsDiv" style={textStyle}>Apartamente</NavLink>
+                            </DropdownItem>
 
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Case</NavLink>
-                                    </DropdownItem>
-
-                                </DropdownMenu>
-                            </Dropdown>
-
-                            <Dropdown direction={'end'} onMouseEnter={commercialMouseOn} onMouseLeave={commercialMouseOff} toggle={commercialToggle} isOpen={commercialDropdownOpen}>
-                                <DropdownToggle style={textStyle} className="navLinksDropdown" nav caret>
-                                    Imobile comerciale
-                                </DropdownToggle>
-                                <DropdownMenu dark>
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Garsoniere</NavLink>
-                                    </DropdownItem>
-
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Apartamente</NavLink>
-                                    </DropdownItem>
-
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Case</NavLink>
-                                    </DropdownItem>
-
-                                </DropdownMenu>
-                            </Dropdown>
-
+                            <DropdownItem>
+                                <NavLink href="/rent#housesDiv" style={textStyle}>Case</NavLink>
+                            </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 
@@ -139,50 +89,21 @@ function NavigationBar(props) {
                             Vanzari
                         </DropdownToggle>
                         <DropdownMenu dark>
-                            <Dropdown direction={'end'} onMouseEnter={residentialMouseOn} onMouseLeave={residentialMouseOff} toggle={residentialToggle} isOpen={residentialDropdownOpen}>
-                                <DropdownToggle style={textStyle} className="navLinksDropdown" nav caret>
-                                    Imobile rezidentiale
-                                </DropdownToggle>
-                                <DropdownMenu dark>
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Garsoniere</NavLink>
-                                    </DropdownItem>
+                            <DropdownItem>
+                                <NavLink href="/" style={textStyle}>Garsoniere</NavLink>
+                            </DropdownItem>
 
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Apartamente</NavLink>
-                                    </DropdownItem>
+                            <DropdownItem>
+                                <NavLink href="/" style={textStyle}>Apartamente</NavLink>
+                            </DropdownItem>
 
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Case</NavLink>
-                                    </DropdownItem>
-
-                                </DropdownMenu>
-                            </Dropdown>
-
-                            <Dropdown direction={'end'} onMouseEnter={commercialMouseOn} onMouseLeave={commercialMouseOff} toggle={commercialToggle} isOpen={commercialDropdownOpen}>
-                                <DropdownToggle style={textStyle} className="navLinksDropdown" nav caret>
-                                    Imobile comerciale
-                                </DropdownToggle>
-                                <DropdownMenu dark>
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Garsoniere</NavLink>
-                                    </DropdownItem>
-
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Apartamente</NavLink>
-                                    </DropdownItem>
-
-                                    <DropdownItem>
-                                        <NavLink href="/" style={textStyle}>Case</NavLink>
-                                    </DropdownItem>
-
-                                </DropdownMenu>
-                            </Dropdown>
-
+                            <DropdownItem>
+                                <NavLink href="/" style={textStyle}>Case</NavLink>
+                            </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
 
-                    <NavLink href="/" style={textStyle} className="navLinks">Contact</NavLink>
+                    <NavLink href="/contact" style={textStyle} className="navLinks">Contact</NavLink>
                 </Nav>
                 <Nav className="ms-auto" navbar>
                     <NavItem>
@@ -193,7 +114,8 @@ function NavigationBar(props) {
                     </NavItem>
                 </Nav>
             </Navbar>
-            <a ref={purchaseRef} href="/rent" style={{display: 'none'}}/>
+            <a ref={rentRef} href="/rent" style={{display: 'none'}}/>
+            <a ref={purchaseRef} href="/purchase" style={{display: 'none'}}/>
         </div>
     );
 }
