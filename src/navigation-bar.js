@@ -69,17 +69,11 @@ function NavigationBar(props) {
                             Inchirieri
                         </DropdownToggle>
                         <DropdownMenu dark>
-                            <DropdownItem>
-                                <NavLink href="/rent#studiosDiv" style={textStyle}>Garsoniere</NavLink>
-                            </DropdownItem>
+                            <NavLink href="/rent#studiosDiv" className="navLinksDropdown" style={textStyle}>Garsoniere</NavLink>
 
-                            <DropdownItem>
-                                <NavLink href="/rent#apartmentsDiv" style={textStyle}>Apartamente</NavLink>
-                            </DropdownItem>
+                            <NavLink href="/rent#apartmentsDiv" className="navLinksDropdown" style={textStyle}>Apartamente</NavLink>
 
-                            <DropdownItem>
-                                <NavLink href="/rent#housesDiv" style={textStyle}>Case</NavLink>
-                            </DropdownItem>
+                            <NavLink href="/rent#housesDiv" className="navLinksDropdown" style={textStyle}>Case</NavLink>
                         </DropdownMenu>
                     </Dropdown>
 
@@ -89,17 +83,11 @@ function NavigationBar(props) {
                             Vanzari
                         </DropdownToggle>
                         <DropdownMenu dark>
-                            <DropdownItem>
-                                <NavLink href="/" style={textStyle}>Garsoniere</NavLink>
-                            </DropdownItem>
+                            <NavLink href="/purchase#studiosDiv" className="navLinksDropdown" style={textStyle}>Garsoniere</NavLink>
 
-                            <DropdownItem>
-                                <NavLink href="/" style={textStyle}>Apartamente</NavLink>
-                            </DropdownItem>
+                            <NavLink href="/purchase#apartmentsDiv" className="navLinksDropdown" style={textStyle}>Apartamente</NavLink>
 
-                            <DropdownItem>
-                                <NavLink href="/" style={textStyle}>Case</NavLink>
-                            </DropdownItem>
+                            <NavLink href="/purchase#housesDiv" className="navLinksDropdown" style={textStyle}>Case</NavLink>
                         </DropdownMenu>
                     </Dropdown>
 

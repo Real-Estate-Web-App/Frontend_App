@@ -184,3 +184,7 @@ body{
     color: #FFFFFF !important;
     border: #585454 !important;
 }
+
+.navLinksRent:hover {
+    background-color: #585454;
+}

@@ -1,6 +1,6 @@
 import './rent-style.css';
 import React, {useState} from "react";
-import {Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Input, Row} from "reactstrap";
+import {Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Input, Nav, Navbar, NavLink, Row} from "reactstrap";
 import DatePicker from 'react-date-picker';
 
 import thirdCardImage from "../commons/images/third-card-image.jpg";

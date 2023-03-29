@@ -5,7 +5,32 @@ body{
 }
 
 .mainPageDiv{
-    display: block;
+    display: grid;
     width: 100vw;
     height: 100vh;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../commons/images/about-us-image.jpg');
+}
+
+.videoDiv{
+    grid-column: 1;
+    grid-row: 2;
+
+    padding: 0 5vmax 0 5vmax;
+}
+
+.informationDiv{
+    grid-column: 2;
+    grid-row: 2;
+    height: fit-content;
+
+    font-size: 1.3vmax;
+    background-color: #FFFFFF;
+
+    padding: 1vmax 1vmax 1vmax 1vmax;
+    margin: 0 5vmax 0 0;
+    border-radius: 1vmax;
 }

@@ -1,0 +1,36 @@
+/* Contact page */
+
+body{
+    overflow-x: hidden;
+}
+
+.contactPageDiv{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('../commons/images/contact-page-image.jpg');
+}
+
+.contactVideoDiv{
+    grid-column: 1;
+    grid-row: 2;
+
+    padding: 0 5vmax 0 5vmax;
+}
+
+.contactDiv{
+    grid-column: 2;
+    grid-row: 2;
+    height: fit-content;
+
+    font-size: 1.5vmax;
+    background-color: #FFFFFF;
+
+    padding: 2vmax 5vmax 2vmax 5vmax;
+    margin: 0 5vmax 0 0;
+    border-radius: 1vmax;
+}
