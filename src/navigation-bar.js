@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import './index.css';
 import {
     Button, Dropdown,
-    DropdownItem,
     DropdownMenu,
     DropdownToggle,
     Nav,
@@ -12,6 +11,7 @@ import {
 } from 'reactstrap';
 import logo from './commons/images/navbar-image.png';
 import {withRouter} from "react-router-dom";
+import LoginModal from "./components/login-modal";
 
 const textStyle = {
     color: 'white',
@@ -95,7 +95,7 @@ function NavigationBar(props) {
                 </Nav>
                 <Nav className="ms-auto" navbar>
                     <NavItem>
-                        <Button style={{backgroundColor: '#9ACD32', marginRight: '10%'}}>Login</Button>
+                        <LoginModal />
                     </NavItem>
                     <NavItem>
                         <Button style={{backgroundColor: '#cc506e', marginLeft: '10%'}}>Register</Button>

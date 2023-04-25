@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {createContext, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import NavigationBar from './navigation-bar';
@@ -8,22 +8,24 @@ import Rent from "./rent/rent";
 import Purchase from "./purchase/purchase";
 import AboutUs from "./aboutus/about-us";
 import Contact from "./contact/contact";
-// import ErrorPage from './commons/errorhandling/error-page';
-
 import './App.css';
 
-function App() {
+export const AppContext = createContext();
 
-  // function resetCookies() { //functia care reseteaza iconitele -> trimisa la navbar -> logout user.
-  //   localStorage.clear();
-  //   console.log("User: " + JSON.parse(localStorage.getItem('user')));
-  // }
+// import ErrorPage from './commons/errorhandling/error-page';
+
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   return (
-      <div>{/*className={styles.back}*/}
+      <AppContext.Provider
+          value={{ isAdmin, isLoggedIn, setIsLoggedIn, setIsAdmin }}
+      >
+      <div>
         <Router>
           <div>
-            <NavigationBar/> {/*onClickFunction={resetCookies}*/}
+            <NavigationBar/>
             <Switch>
               <Route
                   exact
@@ -68,6 +70,7 @@ function App() {
           </div>
         </Router>
       </div>
+      </AppContext.Provider>
   );
 }
 
