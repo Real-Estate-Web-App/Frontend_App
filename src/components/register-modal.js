@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
-import LoginForm from "./login-form";
+import RegisterForm from "./register-form";
 
-function LoginModal() {
+function RegisterModal() {
   const [isSelected, setIsSelected] = useState(false);
 
   function toggleIsSelected() {
@@ -13,21 +13,21 @@ function LoginModal() {
     <div>
       <Button
         type="button"
-        style={{ backgroundColor: "#9ACD32", marginRight: "10%" }}
+        style={{ backgroundColor: "#cc506e", marginLeft: "10%" }}
         onClick={toggleIsSelected}
       >
-        Login
+        Register
       </Button>
       <Modal isOpen={isSelected} toggle={toggleIsSelected} size="lg">
         <ModalHeader toggle={toggleIsSelected}>
           {" "}
-          Login to your account:{" "}
+          Create an account:{" "}
         </ModalHeader>
         <ModalBody>
-          <LoginForm toggleModal={toggleIsSelected} />
+          <RegisterForm toggleModal={toggleIsSelected} />
         </ModalBody>
       </Modal>
     </div>
   );
 }
-export default LoginModal;
+export default RegisterModal;

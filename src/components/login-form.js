@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FormGroup, Input, Label, Button } from "reactstrap";
 
 import Validators from "../validators/validators";
@@ -34,7 +34,25 @@ function LoginForm({ toggleModal }) {
   const [formValues, setFormValues] = useState(formInit);
   const [passwordType, setPasswordType] = useState("password");
 
-  const [error, setError] = useState(0);
+  const [error, setError] = useState({ status: 0, message: null });
+
+  useEffect(() => {
+    resetFields();
+  }, []);
+
+  function resetFields() {
+    let elements = { ...formValues };
+    elements["email"].value = "";
+    elements["password"].value = "";
+    elements["email"].valid = false;
+    elements["email"].touched = false;
+    elements["password"].valid = false;
+    elements["password"].touched = false;
+    setFormValues(() => elements);
+
+    let formIsValid = false;
+    setFormIsValid(() => formIsValid);
+  }
 
   function handleChange(event) {
     let name = event.target.name;
@@ -61,15 +79,18 @@ function LoginForm({ toggleModal }) {
     setFormIsValid(() => formIsValid);
   }
 
-  function loginUser(user) { // nu se face request-ul catre be!!!
-    return AuthorizationAPI.login(user, (result, status) => {
+  function loginUser(email, password) {
+    return AuthorizationAPI.login(email, password, (result, status, err) => {
       if (result !== null && (status === 200 || status === 201)) {
+        localStorage.setItem("isLoggedIn", JSON.stringify(true));
         setIsLoggedIn(true);
         if (result.role === "ADMIN") {
+          localStorage.setItem("isAdmin", JSON.stringify(true));
           setIsAdmin(true);
         }
+        toggleModal();
       } else {
-        setError(status);
+        setError(() => ({ status: status, message: err }));
       }
     });
   }
@@ -78,14 +99,7 @@ function LoginForm({ toggleModal }) {
     let email = formValues.email.value;
     let password = formValues.password.value;
     loginUser(email, password);
-    if (isLoggedIn) {
-        toggleModal();
-        alert("Logged in successfully!");
-    }
-    else{
-        alert("Could not login!"); // pot face eroarea sa aiba si mesaj, ca in status am mesaje faine de la be, sa le
-        // folosesc pe alea!!!
-    }
+    resetFields();
   }
 
   function togglePassword() {
@@ -106,7 +120,8 @@ function LoginForm({ toggleModal }) {
           id="emailField"
           placeholder={formValues.email.placeholder}
           onChange={handleChange}
-          defaultValue={formValues.email.value}
+          value={formValues.email.value}
+          // defaultValue={formValues.email.value}
           touched={formValues.email.touched ? 1 : 0}
           valid={formValues.email.valid}
           required
@@ -128,7 +143,8 @@ function LoginForm({ toggleModal }) {
           id="passwordField"
           placeholder={formValues.password.placeholder}
           onChange={handleChange}
-          defaultValue={formValues.password.value}
+          value={formValues.password.value}
+          // defaultValue={formValues.password.value}
           touched={formValues.password.touched ? 1 : 0}
           valid={formValues.password.valid}
           required
@@ -153,7 +169,9 @@ function LoginForm({ toggleModal }) {
         </Button>
       </div>
 
-      {error > 0 && <ErrorHandler />}
+      {error.status > 0 && (
+        <ErrorHandler status={error.status} message={error.message} />
+      )}
     </div>
   );
 }

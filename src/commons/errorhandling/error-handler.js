@@ -1,10 +1,13 @@
 import { UncontrolledAlert } from "reactstrap";
 
-function ErrorHandler() {
+function ErrorHandler({ status, message }) {
   return (
     <div>
+      <br />
       <UncontrolledAlert color="danger">
         An unexpected error occurred on the server side!
+        <br />
+        {status} - {message.error}
       </UncontrolledAlert>
     </div>
   );
