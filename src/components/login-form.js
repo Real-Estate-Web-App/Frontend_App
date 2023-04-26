@@ -29,7 +29,7 @@ const formInit = {
 };
 
 function LoginForm({ toggleModal }) {
-  const { isLoggedIn, setIsLoggedIn, setIsAdmin } = useContext(AppContext);
+  const { setIsLoggedIn, setIsAdmin } = useContext(AppContext);
   const [formIsValid, setFormIsValid] = useState(false);
   const [formValues, setFormValues] = useState(formInit);
   const [passwordType, setPasswordType] = useState("password");
@@ -82,6 +82,11 @@ function LoginForm({ toggleModal }) {
   function loginUser(email, password) {
     return AuthorizationAPI.login(email, password, (result, status, err) => {
       if (result !== null && (status === 200 || status === 201)) {
+        let userData = {
+          id: result.id,
+          role: result.role,
+        };
+        localStorage.setItem("loggedUser", JSON.stringify(userData));
         localStorage.setItem("isLoggedIn", JSON.stringify(true));
         setIsLoggedIn(true);
         if (result.role === "ADMIN") {

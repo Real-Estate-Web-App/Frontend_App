@@ -16,6 +16,7 @@ import LoginModal from "./components/login-modal";
 import RegisterModal from "./components/register-modal";
 import { AppContext } from "./App";
 import LogoutButton from "./components/logout-button";
+import ViewProfileModal from "./components/view-profile-modal";
 
 const textStyle = {
   color: "white",
@@ -169,7 +170,14 @@ function NavigationBar() {
           )}
           {isLoggedIn && (
             <>
-              <LogoutButton />
+              <NavItem>
+                {" "}
+                <ViewProfileModal />
+              </NavItem>
+              <NavItem>
+                {" "}
+                <LogoutButton />
+              </NavItem>
             </>
           )}
         </Nav>

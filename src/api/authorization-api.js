@@ -3,13 +3,33 @@ import RestApiClient from "../commons/api/rest-client";
 
 const endpoint = {
   user: "/user",
+  updateUser: "/updateProfile",
   register: "/register",
   login: "/login",
+  logout: "/logout",
 };
 
-function getUserData(callback) {
+function getUserData(id, callback) {
   let request = new Request(HOST.backend_api + endpoint.user, {
-    method: "GET",
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  });
+  console.log(request.url);
+  RestApiClient.performRequest(request, callback);
+}
+
+function updateUserData(id, first_name, last_name, callback) {
+  let request = new Request(HOST.backend_api + endpoint.updateUser, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id, first_name, last_name }),
   });
   console.log(request.url);
   RestApiClient.performRequest(request, callback);
@@ -44,4 +64,13 @@ function login(email, password, callback) {
   RestApiClient.performRequest(request, callback);
 }
 
-export { getUserData, register, login };
+function logout(callback) {
+  let request = new Request(HOST.backend_api + endpoint.logout, {
+    method: "GET",
+  });
+
+  console.log(request.url);
+  RestApiClient.performRequest(request, callback);
+}
+
+export { getUserData, updateUserData, register, login, logout };
