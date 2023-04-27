@@ -40,6 +40,7 @@ function AdminModals({ reloadCardValues, cardData, setCardData }) {
   function callDelete() {
     if (cardData !== null) {
       deleteBuilding(cardData.id);
+      alert("Deleted successfully!");
     } else {
       alert("You have to select a card first!");
     }

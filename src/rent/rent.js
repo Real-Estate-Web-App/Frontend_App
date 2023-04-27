@@ -171,7 +171,7 @@ function Rent() {
   return (
     <div className="mainDiv">
       <div className="bgrImageDiv1" id="studiosDiv">
-        {!isAdmin && (
+        {isAdmin && (
           <AdminModals
             reloadCardValues={getBuildings}
             cardData={selectedCardData}

@@ -18,7 +18,7 @@ const userDataInit = {
   email: "",
   firstName: {
     value: "",
-    valid: false,
+    valid: true,
     touched: false,
     validationRules: {
       isRequired: true,
@@ -27,7 +27,7 @@ const userDataInit = {
   },
   lastName: {
     value: "",
-    valid: false,
+    valid: true,
     touched: false,
     validationRules: {
       isRequired: true,
@@ -38,7 +38,7 @@ const userDataInit = {
 
 function ViewProfileCard() {
   const [userData, setUserData] = useState(userDataInit);
-  const [validFields, setValidFields] = useState(false);
+  const [validFields, setValidFields] = useState(true);
   const [error, setError] = useState({ status: 0, message: null });
 
   useEffect(() => {
