@@ -5,11 +5,12 @@ const endpoint = {
   getBuildings: "/getBuildings",
   createBuilding: "/createBuilding",
   updateBuilding: "/updateBuilding",
+  deleteBuilding: "/deleteBuilding",
 };
 
 function createBuilding(
-  id,
   type,
+  building_type,
   image,
   description,
   address,
@@ -25,8 +26,8 @@ function createBuilding(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id,
       type,
+      building_type,
       image,
       description,
       address,
@@ -69,6 +70,21 @@ function updateBuilding(
   RestApiClient.performRequest(request, callback);
 }
 
+function deleteBuilding(id, callback) {
+  let request = new Request(HOST.backend_api + endpoint.deleteBuilding, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+    }),
+  });
+  console.log(request.url);
+  RestApiClient.performRequest(request, callback);
+}
+
 function getAllBuildings(callback) {
   let request = new Request(HOST.backend_api + endpoint.getBuildings, {
     method: "GET",
@@ -78,4 +94,4 @@ function getAllBuildings(callback) {
   RestApiClient.performRequest(request, callback);
 }
 
-export { createBuilding, updateBuilding, getAllBuildings };
+export { createBuilding, updateBuilding, deleteBuilding, getAllBuildings };

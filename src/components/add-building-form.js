@@ -5,13 +5,18 @@ import { Button, FormGroup, Input, Label } from "reactstrap";
 import ErrorHandler from "../commons/errorhandling/error-handler";
 
 const formInit = {
-  id: {
-    value: "",
-    valid: true,
-  },
   type: {
     value: "",
     placeholder: "RENT or BUY...",
+    valid: true,
+    touched: false,
+    validationRules: {
+      isRequired: true,
+    },
+  },
+  building_type: {
+    value: "",
+    placeholder: "STUDIO, APARTMENT or HOUSE...",
     valid: true,
     touched: false,
     validationRules: {
@@ -31,6 +36,16 @@ const formInit = {
   description: {
     value: "",
     placeholder: "Describe the building...",
+    valid: true,
+    touched: false,
+    validationRules: {
+      isRequired: true,
+      minLength: 7,
+    },
+  },
+  address: {
+    value: "",
+    placeholder: "The building address...",
     valid: true,
     touched: false,
     validationRules: {
@@ -70,27 +85,47 @@ const formInit = {
   },
 };
 
-function AddBuildingForm() {
+function AddBuildingForm({ reloadCardValues, toggleModal }) {
   const [formValues, setFormValues] = useState(formInit);
   const [formIsValid, setFormIsValid] = useState(false);
 
   const [error, setError] = useState({ status: 0, message: null });
 
   useEffect(() => {
-    getData();
+    resetFields();
   }, []);
 
-  function getData() {
+  function resetFields() {
     let elements = { ...formValues };
-    elements["id"].value = cardData.id;
-    elements["type"].value = cardData.type;
-    elements["image"].value = cardData.image;
-    elements["description"].value = cardData.description;
-    elements["total_price"].value = cardData.total_price;
-    elements["nb_of_rooms"].value = cardData.nb_of_rooms;
-    elements["area"].value = cardData.area;
+    elements["type"].value = "";
+    elements["building_type"].value = "";
+    elements["image"].value = "";
+    elements["description"].value = "";
+    elements["address"].value = "";
+    elements["total_price"].value = "";
+    elements["nb_of_rooms"].value = "";
+    elements["area"].value = "";
+
+    elements["type"].valid = false;
+    elements["building_type"].valid = false;
+    elements["image"].valid = false;
+    elements["description"].valid = false;
+    elements["address"].valid = false;
+    elements["total_price"].valid = false;
+    elements["nb_of_rooms"].valid = false;
+    elements["area"].valid = false;
+
+    elements["type"].touched = false;
+    elements["building_type"].touched = false;
+    elements["image"].touched = false;
+    elements["description"].touched = false;
+    elements["address"].touched = false;
+    elements["total_price"].touched = false;
+    elements["nb_of_rooms"].touched = false;
+    elements["area"].touched = false;
 
     setFormValues(() => elements);
+    setFormIsValid(() => false);
   }
 
   function handleChange(event) {
@@ -116,7 +151,6 @@ function AddBuildingForm() {
 
     setFormValues(() => updatedValues);
     setFormIsValid(() => formIsValid);
-    console.log("is form valid? " + formIsValid);
   }
 
   function createBuilding(
@@ -140,6 +174,7 @@ function AddBuildingForm() {
       area,
       (result, status, err) => {
         if (result !== null && (status === 200 || status === 201)) {
+          toggleModal();
           reloadCardValues();
         } else {
           setError(() => ({ status: status, message: err }));
@@ -149,20 +184,27 @@ function AddBuildingForm() {
   }
 
   function handleSubmit() {
-    let id = formValues.id.value;
     let type = formValues.type.value;
+    let building_type = formValues.building_type.value;
     let image = formValues.image.value;
     let description = formValues.description.value;
+    let address = formValues.address.value;
     let total_price = formValues.total_price.value;
     let nb_of_rooms = formValues.nb_of_rooms.value;
     let area = formValues.area.value;
 
-    if (type === "RENT" || type === "BUY") {
-      updateBuilding(
-        id,
+    if (
+      (type === "RENT" || type === "BUY") &&
+      (building_type === "STUDIO" ||
+        building_type === "APARTMENT" ||
+        building_type === "HOUSE")
+    ) {
+      createBuilding(
         type,
+        building_type,
         image,
         description,
+        address,
         total_price,
         nb_of_rooms,
         area
@@ -172,17 +214,6 @@ function AddBuildingForm() {
 
   return (
     <div>
-      <FormGroup id="id">
-        <Label for="idField"> ID: </Label>
-        <Input
-          type={"text"}
-          name="id"
-          id="idField"
-          value={formValues.id.value}
-          disabled
-        />
-      </FormGroup>
-
       <FormGroup id="type">
         <Label for="typeField"> Type: </Label>
         <Input
@@ -190,6 +221,7 @@ function AddBuildingForm() {
           name="type"
           id="typeField"
           value={formValues.type.value}
+          placeholder={formValues.type.placeholder}
           touched={formValues.type.touched ? 1 : 0}
           valid={formValues.type.valid}
           onChange={handleChange}
@@ -204,6 +236,30 @@ function AddBuildingForm() {
           )}
       </FormGroup>
 
+      <FormGroup id="building_type">
+        <Label for="building_typeField"> Building type: </Label>
+        <Input
+          type={"text"}
+          name="building_type"
+          id="building_typeField"
+          value={formValues.building_type.value}
+          placeholder={formValues.building_type.placeholder}
+          touched={formValues.building_type.touched ? 1 : 0}
+          valid={formValues.building_type.valid}
+          onChange={handleChange}
+        />
+        {formValues.building_type.touched &&
+          formValues.building_type.value !== "STUDIO" &&
+          formValues.building_type.value !== "APARTMENT" &&
+          formValues.building_type.value !== "HOUSE" && (
+            <div className={"error-message"}>
+              {" "}
+              * Building type must have a valid format: STUDIO, APARTMENT or
+              HOUSE *{" "}
+            </div>
+          )}
+      </FormGroup>
+
       <FormGroup id="image">
         <Label for="imageField"> Image: </Label>
         <Input
@@ -211,6 +267,7 @@ function AddBuildingForm() {
           name="image"
           id="imageField"
           value={formValues.image.value}
+          placeholder={formValues.image.placeholder}
           touched={formValues.image.touched ? 1 : 0}
           valid={formValues.image.valid}
           onChange={handleChange}
@@ -230,6 +287,7 @@ function AddBuildingForm() {
           name="description"
           id="descriptionField"
           value={formValues.description.value}
+          placeholder={formValues.description.placeholder}
           touched={formValues.description.touched ? 1 : 0}
           valid={formValues.description.valid}
           onChange={handleChange}
@@ -242,6 +300,26 @@ function AddBuildingForm() {
         )}
       </FormGroup>
 
+      <FormGroup id="address">
+        <Label for="addressField"> Address: </Label>
+        <Input
+          type={"text"}
+          name="address"
+          id="addressField"
+          value={formValues.address.value}
+          placeholder={formValues.address.placeholder}
+          touched={formValues.address.touched ? 1 : 0}
+          valid={formValues.address.valid}
+          onChange={handleChange}
+        />
+        {formValues.address.touched && !formValues.address.valid && (
+          <div className={"error-message"}>
+            {" "}
+            * Address must have a valid format *{" "}
+          </div>
+        )}
+      </FormGroup>
+
       <FormGroup id="total_price">
         <Label for="total_priceField"> Total price: </Label>
         <Input
@@ -249,6 +327,7 @@ function AddBuildingForm() {
           name="total_price"
           id="total_priceField"
           value={formValues.total_price.value}
+          placeholder={formValues.total_price.placeholder}
           touched={formValues.total_price.touched ? 1 : 0}
           valid={formValues.total_price.valid}
           onChange={handleChange}
@@ -268,6 +347,7 @@ function AddBuildingForm() {
           name="nb_of_rooms"
           id="nb_of_roomsField"
           value={formValues.nb_of_rooms.value}
+          placeholder={formValues.nb_of_rooms.placeholder}
           touched={formValues.nb_of_rooms.touched ? 1 : 0}
           valid={formValues.nb_of_rooms.valid}
           onChange={handleChange}
@@ -287,6 +367,7 @@ function AddBuildingForm() {
           name="area"
           id="areaField"
           value={formValues.area.value}
+          placeholder={formValues.area.placeholder}
           touched={formValues.area.touched ? 1 : 0}
           valid={formValues.area.valid}
           onChange={handleChange}
@@ -307,7 +388,7 @@ function AddBuildingForm() {
           onClick={handleSubmit}
         >
           {" "}
-          Edit building{" "}
+          Add building{" "}
         </Button>
       </div>
 

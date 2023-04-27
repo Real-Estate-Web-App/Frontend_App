@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Button,
-  Card,
   CardHeader,
   Col,
   Modal,
@@ -9,25 +8,38 @@ import {
   ModalHeader,
   Row,
 } from "reactstrap";
-import LoginForm from "./login-form";
 import EditBuildingForm from "./edit-building-form";
+import AddBuildingForm from "./add-building-form";
+import * as BuildingsAPI from "../api/buildings-api";
 
-function AdminModals({ reloadCardValues, cardData }) {
+function AdminModals({ reloadCardValues, cardData, setCardData }) {
   const [isSelectedAdd, setIsSelectedAdd] = useState(false);
-  const [isSelectedDelete, setIsSelectedDelete] = useState(false);
   const [isSelectedEdit, setIsSelectedEdit] = useState(false);
 
   function toggleIsSelectedAdd() {
     setIsSelectedAdd(!isSelectedAdd);
   }
 
-  function toggleIsSelectedDelete() {
-    setIsSelectedDelete(!isSelectedDelete);
-  }
-
   function toggleIsSelectedEdit() {
     if (cardData !== null) {
       setIsSelectedEdit(!isSelectedEdit);
+    } else {
+      alert("You have to select a card first!");
+    }
+  }
+
+  function deleteBuilding(id) {
+    return BuildingsAPI.deleteBuilding(id, (result, status) => {
+      if (result !== null && (status === 200 || status === 201)) {
+        setCardData(() => null);
+        reloadCardValues();
+      }
+    });
+  }
+
+  function callDelete() {
+    if (cardData !== null) {
+      deleteBuilding(cardData.id);
     } else {
       alert("You have to select a card first!");
     }
@@ -71,7 +83,12 @@ function AdminModals({ reloadCardValues, cardData }) {
                 {" "}
                 Add a new building:{" "}
               </ModalHeader>
-              <ModalBody></ModalBody>
+              <ModalBody>
+                <AddBuildingForm
+                  reloadCardValues={reloadCardValues}
+                  toggleModal={toggleIsSelectedAdd}
+                />
+              </ModalBody>
             </Modal>
 
             <Button
@@ -81,21 +98,10 @@ function AdminModals({ reloadCardValues, cardData }) {
                 alignSelf: "center",
                 margin: "0 1% 0 1%",
               }}
-              onClick={toggleIsSelectedDelete}
+              onClick={callDelete}
             >
               Delete building
             </Button>
-            <Modal
-              isOpen={isSelectedDelete}
-              toggle={toggleIsSelectedDelete}
-              size="lg"
-            >
-              <ModalHeader toggle={toggleIsSelectedDelete}>
-                {" "}
-                Delete a building:{" "}
-              </ModalHeader>
-              <ModalBody></ModalBody>
-            </Modal>
 
             <Button
               type="button"
@@ -122,6 +128,8 @@ function AdminModals({ reloadCardValues, cardData }) {
                 <EditBuildingForm
                   reloadCardValues={reloadCardValues}
                   cardData={cardData}
+                  toggleModal={toggleIsSelectedEdit}
+                  setCardData={setCardData}
                 />
               </ModalBody>
             </Modal>

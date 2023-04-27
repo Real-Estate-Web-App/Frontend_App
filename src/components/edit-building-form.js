@@ -70,7 +70,12 @@ const formInit = {
   },
 };
 
-function EditBuildingForm({ reloadCardValues, cardData }) {
+function EditBuildingForm({
+  reloadCardValues,
+  cardData,
+  toggleModal,
+  setCardData,
+}) {
   const [formValues, setFormValues] = useState(formInit);
   const [formIsValid, setFormIsValid] = useState(false);
 
@@ -138,7 +143,9 @@ function EditBuildingForm({ reloadCardValues, cardData }) {
       area,
       (result, status, err) => {
         if (result !== null && (status === 200 || status === 201)) {
+          toggleModal();
           reloadCardValues();
+          setCardData(() => null);
         } else {
           setError(() => ({ status: status, message: err }));
         }

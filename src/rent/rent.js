@@ -173,8 +173,9 @@ function Rent() {
       <div className="bgrImageDiv1" id="studiosDiv">
         {!isAdmin && (
           <AdminModals
-            reloadCardValues={getAllBuildings}
+            reloadCardValues={getBuildings}
             cardData={selectedCardData}
+            setCardData={setSelectedCardData}
           />
         )}
         <div className="headerDiv">
