@@ -1,262 +1,296 @@
-import './rent-style.css';
-import React, {useState} from "react";
-import {Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Input, Nav, Navbar, NavLink, Row} from "reactstrap";
-import DatePicker from 'react-date-picker';
+import "./rent-style.css";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardImg,
+  CardText,
+  CardTitle,
+  Col,
+  Input,
+  Row,
+} from "reactstrap";
+import DatePicker from "react-date-picker";
 
 import thirdCardImage from "../commons/images/third-card-image.jpg";
 import calendarIcon from "../commons/images/calendar-icon.png";
+import AdminModals from "../components/admin-modals";
+import * as BuildingsAPI from "../api/buildings-api";
+import { AppContext } from "../App";
+import ErrorHandler from "../commons/errorhandling/error-handler";
+import { getAllBuildings } from "../api/buildings-api";
 
-function Rent(){
+const buildingsInit = {
+  id: "",
+  type: "",
+  building_type: "",
+  image: "",
+  description: "",
+  address: "",
+  total_price: "",
+  nb_of_rooms: "",
+  area: "",
+};
 
-    const [studioValue, setStudioValue] = useState(new Date());
+function Rent() {
+  const { isAdmin } = useContext(AppContext);
+  const [studioValue, setStudioValue] = useState(new Date());
+  const [studiosData, setStudiosData] = useState([]);
+  const [apartmentsData, setApartmentsData] = useState([]);
+  const [housesData, setHousesData] = useState([]);
+  const [selectedCardData, setSelectedCardData] = useState(null);
 
-    return(
-        <div className="mainDiv">
-            <div className="bgrImageDiv1" id="studiosDiv">
-                <div className="headerDiv">
-                    <p className="header1Style1">IMOBILE DE&nbsp;</p>
-                    <p className="header1Style2">INCHIRIAT</p>
-                </div>
-                <p className="header2Style">ANUNTURI GARSONIERE</p>
-                <div className="multipleCardsDiv cardsTextStyle">
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Garsoniera de 25 m²</CardTitle>
-                                    <CardText>
-                                        Cluj-Napoca, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        30.000 € | 1.200 €/m² | 1 camera | 25 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Garsoniera de 30 m²</CardTitle>
-                                    <CardText>
-                                        Gilau, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        30.000 € | 1.000 €/m² | 1 camera | 30 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Garsoniera de 35 m²</CardTitle>
-                                    <CardText>
-                                        Floresti, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        35.000 € | 1.200 €/m² | 2 camere | 35 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                </div>
-                <div className="searchDiv">
-                    <div className="col1Search textSearch">
-                        Cauta garsoniere in:
-                    </div>
-                    <div className="col2Search">
-                        <Input className="inputStyle" type="text" placeholder="Type a city..." />
-                    </div>
-                    <div className="col3Search textSearch">
-                        &nbsp;, in perioada
-                    </div>
-                    <div className="col4Search">
-                        <img src={calendarIcon} width={"40vmax"} height={"40vmax"} alt={"calendar"} />
-                    </div>
-                    <div className="col5Search">
-                        <DatePicker value={studioValue} onChange={setStudioValue} format={"yyyy-MM-dd"}/>
-                    </div>
-                    <div className="col6Search">
-                        <Button style={{backgroundColor: '#cc506e'}}>Cautare</Button>
-                    </div>
-                </div>
-            </div>
+  const [error, setError] = useState({ status: 0, message: null });
 
-            <div className="bgrImageDiv2" id="apartmentsDiv">
-                <p className="headerApartmentsHouses">ANUNTURI APARTAMENTE</p>
-                <div className="multipleCardsDiv cardsTextStyle">
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Apartament de 60 m²</CardTitle>
-                                    <CardText>
-                                        Cluj-Napoca, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        60.000 € | 1.000 €/m² | 2 camere | 60 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Apartament de 100 m²</CardTitle>
-                                    <CardText>
-                                        Florești, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        100.000 € | 1.000 €/m² | 3 camere | 100 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Apartament de 90 m²</CardTitle>
-                                    <CardText>
-                                        Apahida, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        85.000 € | 945 €/m² | 3 camere | 90 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                </div>
-                <div className="searchDiv">
-                    <div className="col1Search textSearch">
-                        Cauta apartamente in:
-                    </div>
-                    <div className="col2Search">
-                        <Input className="inputStyle" type="text" placeholder="Type a city..." />
-                    </div>
-                    <div className="col3Search textSearch">
-                        &nbsp;, in perioada
-                    </div>
-                    <div className="col4Search">
-                        <img src={calendarIcon} width={"40vmax"} height={"40vmax"} alt={"calendar"} />
-                    </div>
-                    <div className="col5Search">
-                        <DatePicker value={studioValue} onChange={setStudioValue} format={"yyyy-MM-dd"}/>
-                    </div>
-                    <div className="col6Search">
-                        <Button style={{backgroundColor: '#cc506e'}}>Cautare</Button>
-                    </div>
-                </div>
-            </div>
+  useEffect(() => {
+    getBuildings();
+  }, []);
 
-            <div className="bgrImageDiv3" id="housesDiv">
-                <p className="headerApartmentsHouses">ANUNTURI CASE</p>
-                <div className="multipleCardsDiv cardsTextStyle">
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Casa de 180 m²</CardTitle>
-                                    <CardText>
-                                        Cluj-Napoca, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        250.000 € | 1.389 €/m² | 4 camere | 180 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Casa de 200 m²</CardTitle>
-                                    <CardText>
-                                        Florești, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        300.000 € | 1.500 €/m² | 5 camere | 200 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                    <Card className="cardDiv">
-                        <Row className="g-0">
-                            <Col md={4} className="colsStyle">
-                                <CardImg variant="top" src={thirdCardImage} />
-                            </Col>
-                            <Col md={8} className="colsStyle">
-                                <CardBody>
-                                    <CardTitle>Casa de 230 m²</CardTitle>
-                                    <CardText>
-                                        Apahida, Cluj
-                                    </CardText>
-                                    <CardText>
-                                        300.000 € | 1.305 €/m² | 6 camere | 230 m²
-                                    </CardText>
-                                </CardBody>
-                            </Col>
-                        </Row>
-                    </Card>
-                </div>
-                <div className="searchDiv">
-                    <div className="col1Search textSearch">
-                        Cauta case in:
-                    </div>
-                    <div className="col2Search">
-                        <Input className="inputStyle" type="text" placeholder="Type a city..." />
-                    </div>
-                    <div className="col3Search textSearch">
-                        &nbsp;, in perioada
-                    </div>
-                    <div className="col4Search">
-                        <img src={calendarIcon} width={"40vmax"} height={"40vmax"} alt={"calendar"} />
-                    </div>
-                    <div className="col5Search">
-                        <DatePicker value={studioValue} onChange={setStudioValue} format={"yyyy-MM-dd"}/>
-                    </div>
-                    <div className="col6Search">
-                        <Button style={{backgroundColor: '#cc506e'}}>Cautare</Button>
-                    </div>
-                </div>
-            </div>
+  function setSelectedCard(data) {
+    setSelectedCardData((prevState) => data);
+  }
+
+  function getBuildings() {
+    return BuildingsAPI.getAllBuildings((result, status, err) => {
+      if (result !== null && (status === 200 || status === 201)) {
+        setStudiosData(() => []);
+        setApartmentsData(() => []);
+        setHousesData(() => []);
+        result.forEach((elem) => {
+          if (elem.type === "RENT" && elem.building_type === "STUDIO") {
+            // const image = require(elem.image);
+            setStudiosData((prevState) => [
+              ...prevState,
+              <Card className="cardDiv" key={elem.id}>
+                <Row className="g-0">
+                  <Col md={4} className="colsStyle">
+                    {/* De pus imaginile din elem */}
+                    <CardImg variant="top" src={thirdCardImage} />
+                  </Col>
+                  <Col md={8} className="colsStyle">
+                    <CardBody>
+                      <CardTitle>{elem.description}</CardTitle>
+                      <CardText>{elem.address}</CardText>
+                      <CardText>
+                        {elem.total_price} € | {elem.total_price / elem.area}{" "}
+                        €/m² | {elem.nb_of_rooms} camera(e) | {elem.area} m²
+                      </CardText>
+                      <Button
+                        style={{
+                          backgroundColor: "#9ACD32",
+                          marginRight: "10%",
+                        }}
+                        key={elem.id + 1}
+                        onClick={() => setSelectedCard(elem)}
+                      >
+                        Select building
+                      </Button>
+                    </CardBody>
+                  </Col>
+                </Row>
+              </Card>,
+            ]);
+          } else if (
+            elem.type === "RENT" &&
+            elem.building_type === "APARTMENT"
+          ) {
+            // const image = require(elem.image);
+            setApartmentsData((prevState) => [
+              ...prevState,
+              <Card className="cardDiv" key={elem.id}>
+                <Row className="g-0">
+                  <Col md={4} className="colsStyle">
+                    {/* De pus imaginile din elem */}
+                    <CardImg variant="top" src={thirdCardImage} />
+                  </Col>
+                  <Col md={8} className="colsStyle">
+                    <CardBody>
+                      <CardTitle>{elem.description}</CardTitle>
+                      <CardText>{elem.address}</CardText>
+                      <CardText>
+                        {elem.total_price} € | {elem.total_price / elem.area}{" "}
+                        €/m² | {elem.nb_of_rooms} camera(e) | {elem.area} m²
+                      </CardText>
+                      <Button
+                        style={{
+                          backgroundColor: "#9ACD32",
+                          marginRight: "10%",
+                        }}
+                        key={elem.id + 1}
+                        onClick={() => setSelectedCard(elem)}
+                      >
+                        Select building
+                      </Button>
+                    </CardBody>
+                  </Col>
+                </Row>
+              </Card>,
+            ]);
+          } else if (elem.type === "RENT" && elem.building_type === "HOUSE") {
+            // const image = require(elem.image);
+            setHousesData((prevState) => [
+              ...prevState,
+              <Card className="cardDiv" key={elem.id}>
+                <Row className="g-0">
+                  <Col md={4} className="colsStyle">
+                    {/* De pus imaginile din elem */}
+                    <CardImg variant="top" src={thirdCardImage} />
+                  </Col>
+                  <Col md={8} className="colsStyle">
+                    <CardBody>
+                      <CardTitle>{elem.description}</CardTitle>
+                      <CardText>{elem.address}</CardText>
+                      <CardText>
+                        {elem.total_price} € | {elem.total_price / elem.area}{" "}
+                        €/m² | {elem.nb_of_rooms} camera(e) | {elem.area} m²
+                      </CardText>
+                      <Button
+                        style={{
+                          backgroundColor: "#9ACD32",
+                          marginRight: "10%",
+                        }}
+                        key={elem.id + 1}
+                        onClick={() => setSelectedCard(elem)}
+                      >
+                        Select building
+                      </Button>
+                    </CardBody>
+                  </Col>
+                </Row>
+              </Card>,
+            ]);
+          }
+        });
+      } else {
+        setError(() => ({ status: status, message: err }));
+      }
+    });
+  }
+
+  return (
+    <div className="mainDiv">
+      <div className="bgrImageDiv1" id="studiosDiv">
+        {!isAdmin && (
+          <AdminModals
+            reloadCardValues={getAllBuildings}
+            cardData={selectedCardData}
+          />
+        )}
+        <div className="headerDiv">
+          <p className="header1Style1">IMOBILE DE&nbsp;</p>
+          <p className="header1Style2">INCHIRIAT</p>
         </div>
-    );
+        <p className="header2Style">ANUNTURI GARSONIERE</p>
+        <div className="multipleCardsDiv cardsTextStyle">{studiosData}</div>
+        {error.status > 0 && (
+          <ErrorHandler status={error.status} message={error.message} />
+        )}
+        <div className="searchDiv">
+          <div className="col1Search textSearch">Cauta garsoniere in:</div>
+          <div className="col2Search">
+            <Input
+              className="inputStyle"
+              type="text"
+              placeholder="Type a city..."
+            />
+          </div>
+          <div className="col3Search textSearch">&nbsp;, in perioada</div>
+          <div className="col4Search">
+            <img
+              src={calendarIcon}
+              width={"40vmax"}
+              height={"40vmax"}
+              alt={"calendar"}
+            />
+          </div>
+          <div className="col5Search">
+            <DatePicker
+              value={studioValue}
+              onChange={setStudioValue}
+              format={"yyyy-MM-dd"}
+            />
+          </div>
+          <div className="col6Search">
+            <Button style={{ backgroundColor: "#cc506e" }}>Cautare</Button>
+          </div>
+        </div>
+      </div>
 
+      <div className="bgrImageDiv2" id="apartmentsDiv">
+        <p className="headerApartmentsHouses">ANUNTURI APARTAMENTE</p>
+        <div className="multipleCardsDiv cardsTextStyle">{apartmentsData}</div>
+        {error.status > 0 && (
+          <ErrorHandler status={error.status} message={error.message} />
+        )}
+        <div className="searchDiv">
+          <div className="col1Search textSearch">Cauta apartamente in:</div>
+          <div className="col2Search">
+            <Input
+              className="inputStyle"
+              type="text"
+              placeholder="Type a city..."
+            />
+          </div>
+          <div className="col3Search textSearch">&nbsp;, in perioada</div>
+          <div className="col4Search">
+            <img
+              src={calendarIcon}
+              width={"40vmax"}
+              height={"40vmax"}
+              alt={"calendar"}
+            />
+          </div>
+          <div className="col5Search">
+            <DatePicker
+              value={studioValue}
+              onChange={setStudioValue}
+              format={"yyyy-MM-dd"}
+            />
+          </div>
+          <div className="col6Search">
+            <Button style={{ backgroundColor: "#cc506e" }}>Cautare</Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="bgrImageDiv3" id="housesDiv">
+        <p className="headerApartmentsHouses">ANUNTURI CASE</p>
+        <div className="multipleCardsDiv cardsTextStyle">{housesData}</div>
+        {error.status > 0 && (
+          <ErrorHandler status={error.status} message={error.message} />
+        )}
+        <div className="searchDiv">
+          <div className="col1Search textSearch">Cauta case in:</div>
+          <div className="col2Search">
+            <Input
+              className="inputStyle"
+              type="text"
+              placeholder="Type a city..."
+            />
+          </div>
+          <div className="col3Search textSearch">&nbsp;, in perioada</div>
+          <div className="col4Search">
+            <img
+              src={calendarIcon}
+              width={"40vmax"}
+              height={"40vmax"}
+              alt={"calendar"}
+            />
+          </div>
+          <div className="col5Search">
+            <DatePicker
+              value={studioValue}
+              onChange={setStudioValue}
+              format={"yyyy-MM-dd"}
+            />
+          </div>
+          <div className="col6Search">
+            <Button style={{ backgroundColor: "#cc506e" }}>Cautare</Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 export default Rent;
