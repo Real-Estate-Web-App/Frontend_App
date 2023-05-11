@@ -20,6 +20,7 @@ import * as BuildingsAPI from "../api/buildings-api";
 import { AppContext } from "../App";
 import ErrorHandler from "../commons/errorhandling/error-handler";
 import { getAllBuildings } from "../api/buildings-api";
+import CreateAppointmentModal from "../components/create-appointment-modal";
 
 const buildingsInit = {
   id: "",
@@ -34,7 +35,7 @@ const buildingsInit = {
 };
 
 function Rent() {
-  const { isAdmin } = useContext(AppContext);
+  const { isLoggedIn, isAdmin } = useContext(AppContext);
   const [studioValue, setStudioValue] = useState(new Date());
   const [studiosData, setStudiosData] = useState([]);
   const [apartmentsData, setApartmentsData] = useState([]);
@@ -177,6 +178,9 @@ function Rent() {
             cardData={selectedCardData}
             setCardData={setSelectedCardData}
           />
+        )}
+        {isLoggedIn && !isAdmin && (
+          <CreateAppointmentModal cardData={selectedCardData} />
         )}
         <div className="headerDiv">
           <p className="header1Style1">IMOBILE DE&nbsp;</p>
