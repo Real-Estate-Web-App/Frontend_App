@@ -3,6 +3,7 @@ import RestApiClient from "../commons/api/rest-client";
 
 const endpoint = {
   appointment: "/makeAppointment",
+  allAppointments: "/getAppointments",
 };
 
 function makeAppointment(building_id, user_id, app_date, app_time, callback) {
@@ -23,4 +24,21 @@ function makeAppointment(building_id, user_id, app_date, app_time, callback) {
   RestApiClient.performRequest(request, callback);
 }
 
-export { makeAppointment };
+function getAllAppointmentsForMonth(building_id, month, callback) {
+  let request = new Request(
+    HOST.backend_api +
+      endpoint.allAppointments +
+      "?" +
+      building_id +
+      "&" +
+      month,
+    {
+      method: "GET",
+    }
+  );
+
+  console.log(request.url);
+  RestApiClient.performRequest(request, callback);
+}
+
+export { makeAppointment, getAllAppointmentsForMonth };
