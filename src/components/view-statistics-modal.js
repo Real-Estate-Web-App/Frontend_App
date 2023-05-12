@@ -15,7 +15,7 @@ const initialData = {
   },
   series: [
     {
-      name: "series-1",
+      name: "appointments",
       data: [],
     },
   ],
@@ -39,7 +39,12 @@ function ViewStatisticsModal({ building_id }) {
         if (result !== null && status === 200) {
           let days = [];
           let values = [];
-          // TO DO: process received data;
+
+          Object.entries(result).map(([day, value]) => {
+            days.push(day);
+            values.push(value);
+          });
+
           const newData = {
             options: {
               chart: {
@@ -51,7 +56,7 @@ function ViewStatisticsModal({ building_id }) {
             },
             series: [
               {
-                name: "series-1",
+                name: "appointments",
                 data: values,
               },
             ],
@@ -66,15 +71,25 @@ function ViewStatisticsModal({ building_id }) {
 
   function handleSubmit() {
     toggleIsSelected();
-    let currentMonth = new Date().getMonth();
+    let currentMonth = new Date().getMonth() + 1;
+    if (currentMonth < 10) {
+      currentMonth = "0" + currentMonth;
+    }
     getStatisticsForMonth(building_id, currentMonth);
   }
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
       <Button
         type="button"
-        style={{ backgroundColor: "#cc506e", marginRight: "10%" }}
+        style={{
+          backgroundColor: "#cc506e",
+          alignSelf: "center",
+        }}
         onClick={handleSubmit}
       >
         View statistics
@@ -85,13 +100,21 @@ function ViewStatisticsModal({ building_id }) {
           This month's appointments:{" "}
         </ModalHeader>
         <ModalBody>
-          <Chart
-            options={data.options}
-            series={data.series}
-            type="bar"
-            width={500}
-            height={320}
-          />
+          {data.series[0].data.length !== 0 &&
+            data.options.xaxis.categories.length !== 0 && (
+              <Chart
+                options={data.options}
+                series={data.series}
+                type="bar"
+                width={"100%"}
+                height={"100%"}
+              />
+            )}
+          {data.series[0].data.length === 0 &&
+            data.options.xaxis.categories.length === 0 && (
+              <p>Nothing to show for the current month</p>
+            )}
+
           {error.status > 0 && (
             <ErrorHandler status={error.status} message={error.message} />
           )}

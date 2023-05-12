@@ -21,6 +21,7 @@ import { AppContext } from "../App";
 import ErrorHandler from "../commons/errorhandling/error-handler";
 import { getAllBuildings } from "../api/buildings-api";
 import CreateAppointmentModal from "../components/create-appointment-modal";
+import ViewStatisticsModal from "../components/view-statistics-modal";
 
 const buildingsInit = {
   id: "",
@@ -77,16 +78,26 @@ function Rent() {
                         {elem.total_price} € | {elem.total_price / elem.area}{" "}
                         €/m² | {elem.nb_of_rooms} camera(e) | {elem.area} m²
                       </CardText>
-                      <Button
+                      <div
                         style={{
-                          backgroundColor: "#9ACD32",
-                          marginRight: "10%",
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-evenly",
                         }}
-                        key={elem.id + 1}
-                        onClick={() => setSelectedCard(elem)}
                       >
-                        Select building
-                      </Button>
+                        <Button
+                          style={{
+                            backgroundColor: "#9ACD32",
+                            marginRight: "10%",
+                            alignSelf: "center",
+                          }}
+                          key={elem.id + 1}
+                          onClick={() => setSelectedCard(elem)}
+                        >
+                          Select building
+                        </Button>
+                        <ViewStatisticsModal building_id={elem.id} />
+                      </div>
                     </CardBody>
                   </Col>
                 </Row>

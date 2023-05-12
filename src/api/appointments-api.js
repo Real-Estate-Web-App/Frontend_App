@@ -28,9 +28,9 @@ function getAllAppointmentsForMonth(building_id, month, callback) {
   let request = new Request(
     HOST.backend_api +
       endpoint.allAppointments +
-      "?" +
+      "?building_id=" +
       building_id +
-      "&" +
+      "&month=" +
       month,
     {
       method: "GET",
