@@ -83,7 +83,8 @@ function CreateAppointmentForm({ cardData, toggleModal }) {
   function handleSubmit() {
     let building_id = formValues.id.value;
     let user_id = JSON.parse(localStorage.getItem("loggedUser")).id;
-    let app_date = appDate.toISOString().substr(0, 10);
+    let day = Number(appDate.toISOString().substr(8, 2)) + 1;
+    let app_date = appDate.toISOString().substr(0, 8) + String(day);
     makeAppointmentForClient(building_id, user_id, app_date, appTime);
   }
 
