@@ -19,7 +19,6 @@ import AdminModals from "../components/admin-modals";
 import * as BuildingsAPI from "../api/buildings-api";
 import { AppContext } from "../App";
 import ErrorHandler from "../commons/errorhandling/error-handler";
-import { getAllBuildings } from "../api/buildings-api";
 import CreateAppointmentModal from "../components/create-appointment-modal";
 import ViewStatisticsModal from "../components/view-statistics-modal";
 
@@ -47,10 +46,11 @@ function Rent() {
 
   useEffect(() => {
     getBuildings();
-  }, []);
+  }, [isLoggedIn]);
 
   function setSelectedCard(data) {
     setSelectedCardData((prevState) => data);
+    alert("You selected a card!");
   }
 
   function getBuildings() {
@@ -78,26 +78,28 @@ function Rent() {
                         {elem.total_price} € | {elem.total_price / elem.area}{" "}
                         €/m² | {elem.nb_of_rooms} camera(e) | {elem.area} m²
                       </CardText>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "space-evenly",
-                        }}
-                      >
-                        <Button
+                      {isLoggedIn && (
+                        <div
                           style={{
-                            backgroundColor: "#9ACD32",
-                            marginRight: "10%",
-                            alignSelf: "center",
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-evenly",
                           }}
-                          key={elem.id + 1}
-                          onClick={() => setSelectedCard(elem)}
                         >
-                          Select building
-                        </Button>
-                        <ViewStatisticsModal building_id={elem.id} />
-                      </div>
+                          <Button
+                            style={{
+                              backgroundColor: "#9ACD32",
+                              marginRight: "10%",
+                              alignSelf: "center",
+                            }}
+                            key={elem.id + 1}
+                            onClick={() => setSelectedCard(elem)}
+                          >
+                            Select building
+                          </Button>
+                          <ViewStatisticsModal building_id={elem.id} />
+                        </div>
+                      )}
                     </CardBody>
                   </Col>
                 </Row>
@@ -124,16 +126,28 @@ function Rent() {
                         {elem.total_price} € | {elem.total_price / elem.area}{" "}
                         €/m² | {elem.nb_of_rooms} camera(e) | {elem.area} m²
                       </CardText>
-                      <Button
-                        style={{
-                          backgroundColor: "#9ACD32",
-                          marginRight: "10%",
-                        }}
-                        key={elem.id + 1}
-                        onClick={() => setSelectedCard(elem)}
-                      >
-                        Select building
-                      </Button>
+                      {isLoggedIn && (
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-evenly",
+                          }}
+                        >
+                          <Button
+                            style={{
+                              backgroundColor: "#9ACD32",
+                              marginRight: "10%",
+                              alignSelf: "center",
+                            }}
+                            key={elem.id + 1}
+                            onClick={() => setSelectedCard(elem)}
+                          >
+                            Select building
+                          </Button>
+                          <ViewStatisticsModal building_id={elem.id} />
+                        </div>
+                      )}
                     </CardBody>
                   </Col>
                 </Row>
@@ -157,16 +171,28 @@ function Rent() {
                         {elem.total_price} € | {elem.total_price / elem.area}{" "}
                         €/m² | {elem.nb_of_rooms} camera(e) | {elem.area} m²
                       </CardText>
-                      <Button
-                        style={{
-                          backgroundColor: "#9ACD32",
-                          marginRight: "10%",
-                        }}
-                        key={elem.id + 1}
-                        onClick={() => setSelectedCard(elem)}
-                      >
-                        Select building
-                      </Button>
+                      {isLoggedIn && (
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-evenly",
+                          }}
+                        >
+                          <Button
+                            style={{
+                              backgroundColor: "#9ACD32",
+                              marginRight: "10%",
+                              alignSelf: "center",
+                            }}
+                            key={elem.id + 1}
+                            onClick={() => setSelectedCard(elem)}
+                          >
+                            Select building
+                          </Button>
+                          <ViewStatisticsModal building_id={elem.id} />
+                        </div>
+                      )}
                     </CardBody>
                   </Col>
                 </Row>
@@ -191,7 +217,10 @@ function Rent() {
           />
         )}
         {isLoggedIn && !isAdmin && (
-          <CreateAppointmentModal cardData={selectedCardData} />
+          <CreateAppointmentModal
+            cardData={selectedCardData}
+            setCardData={setSelectedCardData}
+          />
         )}
         <div className="headerDiv">
           <p className="header1Style1">IMOBILE DE&nbsp;</p>

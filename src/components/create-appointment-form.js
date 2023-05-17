@@ -8,6 +8,7 @@ import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 import * as AppointmentAPI from "../api/appointments-api";
 import ErrorHandler from "../commons/errorhandling/error-handler";
+import thirdCardImage from "../commons/images/third-card-image.jpg";
 
 const formInit = {
   id: {
@@ -36,7 +37,7 @@ const formInit = {
   },
 };
 
-function CreateAppointmentForm({ cardData, toggleModal }) {
+function CreateAppointmentForm({ cardData, toggleModal, setCardData }) {
   const [formValues, setFormValues] = useState(formInit);
   const [appDate, setAppDate] = useState(new Date());
   const [appTime, setAppTime] = useState(
@@ -54,7 +55,6 @@ function CreateAppointmentForm({ cardData, toggleModal }) {
     elements["id"].value = cardData.id;
     elements["type"].value = cardData.type;
     elements["address"].value = cardData.address;
-    //let image = require(cardData.image); // de vazut!!!
     elements["image"].value = cardData.image;
     elements["description"].value = cardData.description;
     elements["total_price"].value = cardData.total_price;
@@ -73,6 +73,7 @@ function CreateAppointmentForm({ cardData, toggleModal }) {
       (result, status, err) => {
         if (result !== null && status === 200) {
           toggleModal();
+          setCardData(() => null);
         } else {
           setError(() => ({ status: status, message: err }));
         }
@@ -83,8 +84,7 @@ function CreateAppointmentForm({ cardData, toggleModal }) {
   function handleSubmit() {
     let building_id = formValues.id.value;
     let user_id = JSON.parse(localStorage.getItem("loggedUser")).id;
-    let day = Number(appDate.toISOString().substr(8, 2)) + 1;
-    let app_date = appDate.toISOString().substr(0, 8) + String(day);
+    let app_date = appDate.toISOString().substr(0, 8) + appDate.getDate();
     makeAppointmentForClient(building_id, user_id, app_date, appTime);
   }
 
@@ -130,7 +130,12 @@ function CreateAppointmentForm({ cardData, toggleModal }) {
         }}
       >
         <Label for="imageField"> Building Image: </Label>
-        <img src={formValues.image.value} alt={"building icon"} />
+        <img
+          src={thirdCardImage}
+          width={"50%"}
+          height={"50%"}
+          alt={"building icon"}
+        />
       </div>
 
       <FormGroup id="description">

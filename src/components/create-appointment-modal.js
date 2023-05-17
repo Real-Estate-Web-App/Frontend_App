@@ -12,7 +12,7 @@ import EditBuildingForm from "./edit-building-form";
 import React, { useState } from "react";
 import CreateAppointmentForm from "./create-appointment-form";
 
-function CreateAppointmentModal({ cardData }) {
+function CreateAppointmentModal({ cardData, setCardData }) {
   const [isSelected, setIsSelected] = useState(false);
 
   function toggleIsSelected() {
@@ -62,6 +62,7 @@ function CreateAppointmentModal({ cardData }) {
                 <CreateAppointmentForm
                   cardData={cardData}
                   toggleModal={toggleIsSelected}
+                  setCardData={setCardData}
                 />
               </ModalBody>
             </Modal>
