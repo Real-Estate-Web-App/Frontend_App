@@ -37,7 +37,7 @@ const formInit = {
   },
   firstName: {
     value: "",
-    placeholder: "Enter your firstname...",
+    placeholder: "Enter your first name...",
     valid: false,
     touched: false,
     validationRules: {
@@ -47,7 +47,7 @@ const formInit = {
   },
   lastName: {
     value: "",
-    placeholder: "Enter your lastname...",
+    placeholder: "Enter your last name...",
     valid: false,
     touched: false,
     validationRules: {
@@ -240,7 +240,7 @@ function RegisterForm({ toggleModal }) {
       </FormGroup>
 
       <FormGroup id="firstName">
-        <Label for="firstNameField"> Firstname: </Label>
+        <Label for="firstNameField"> First Name: </Label>
         <Input
           type={"text"}
           name="firstName"
@@ -255,13 +255,13 @@ function RegisterForm({ toggleModal }) {
         {formValues.firstName.touched && !formValues.firstName.valid && (
           <div className={"error-message"}>
             {" "}
-            * Firstname must have a valid format *{" "}
+            * First Name must have a valid format *{" "}
           </div>
         )}
       </FormGroup>
 
       <FormGroup id="lastName">
-        <Label for="lastNameField"> Lastname: </Label>
+        <Label for="lastNameField"> Last Name: </Label>
         <Input
           type={"text"}
           name="lastName"
@@ -276,7 +276,7 @@ function RegisterForm({ toggleModal }) {
         {formValues.lastName.touched && !formValues.lastName.valid && (
           <div className={"error-message"}>
             {" "}
-            * Lastname must have a valid format *{" "}
+            * Last Name must have a valid format *{" "}
           </div>
         )}
       </FormGroup>
